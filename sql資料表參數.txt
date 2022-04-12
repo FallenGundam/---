@@ -1,0 +1,46 @@
+user 使用者
+u_id:int(10) 編號
+u_mail:varchar(100) 信箱
+u_password:varchar(200) 密碼(md5加密)
+
+member 會員資料
+u_id:int(10) 編號
+m_phone:int(20) 電話
+m_introduction:varchar(1000) 個人簡介
+m_date:date 註冊日期
+m_lineid:varchar(100) line id
+m_location:varchar(10) 地區
+
+product 商品
+p_id:int(10) 編號
+u_id:int(10) 會員編號
+p_unit:varchar(10) 秤重單位
+p_price:int(10) 價格
+p_name:varchar(100) 商品名稱
+p_introduction:varchar(1000) 商品介紹
+p_city:varchar(50) 商品地區
+p_amount:int(10) 商品剩餘數量
+//pc_id:int(10) 商品類別代號
+//p_date:date 上架日期
+
+
+p_image 商品圖片庫
+pi_id:int(10) 編號
+p_id:int(10) 商品編號
+pi_name:varchar(50) 圖片檔案名稱
+
+
+p_class 商品類別
+pc_id:int(10) 編號
+pc_name:varchar(50) 類別名稱
+
+
+order 訂單
+o_id:int
+p_id:int  商品id
+o_buyer_id:int 買家id
+o_seller_id:int 賣家id
+o_amoubt:int 訂單數量
+o_start_date:date 訂購日期
+o_end_state:date 完成日期
+o_state:int 訂單狀態
