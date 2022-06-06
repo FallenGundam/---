@@ -18,10 +18,18 @@ p_unit:varchar(10) 秤重單位
 p_price:int(10) 價格
 p_name:varchar(100) 商品名稱
 p_introduction:varchar(1000) 商品介紹
-p_city:varchar(50) 商品地區
 p_amount:int(10) 商品剩餘數量
-//pc_id:int(10) 商品類別代號
-//p_date:date 上架日期
+p_city:varchar(50) 商品程式
+p_districts:varchar 商品第區
+p_image_list:varchar(50) 商品圖片
+p_type:varchar 商品類型
+p_trade_type:varchar 交易類型
+p_popular:int 查看次數
+
+p_upload_date:date 上架日期
+p_exit_date:date 下架日期
+p_status:boolean 商品狀態
+p_class:varchar
 
 
 p_image 商品圖片庫

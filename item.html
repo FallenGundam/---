@@ -1,10 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
     <!-- Bootstrap CSS -->
@@ -13,44 +13,56 @@
 
 
 
+    <title>Document</title>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <style type="text/css">
+
+    <style>
         body {
             background-color: #ebe1de;
         }
 
-        .card-text {
-            line-height: 75px;
-            max-height: 40px;
-        }
-
-        .search_button {
-            background-color: aliceblue;
-
-        }
-        .page_word:hover{
-            color: aqua;
+        img:hover {
             cursor: pointer;
         }
 
+        #first_img {
+            max-height: 100%;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
 
+
+
+        .bighead {
+            width: 150px;
+            height: 150px;
+            border: 1px solid gray;
+            border-radius: 150px 150px;
+            overflow: hidden;
+        }
+
+        .bighead img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .pre-formatted {
+            white-space: pre-wrap;
+            /* 👈 this is the important part */
+            /* border: 1px dotted; */
+            padding: 1rem;
+        }
     </style>
-
-    <title>農產品推銷平台</title>
-
-
-
 </head>
 
-
-
-
-
-
-
 <body>
-
 
 
     <header>
@@ -105,8 +117,9 @@
 
                             <li class="nav-item mt-2">
                                 <button type="button" class="btn navbar_btn" data-bs-toggle="modal"
-                                    data-bs-target="#shop_car" v-show="canlogout"><img class="logo1" src="img/shop_logo.svg"
-                                        alt=""><span class="nav_span align-middle">願望清單</span></button>
+                                    data-bs-target="#shop_car" v-show="canlogout"><img class="logo1"
+                                        src="img/shop_logo.svg" alt=""><span
+                                        class="nav_span align-middle">願望清單</span></button>
                             </li>
 
                             <li class="nav-item">
@@ -132,134 +145,131 @@
 
 
 
-    <main class="py-5 mt-5 container-lg" id="index">
-        <div class="row g-5 py-5">
-
-
-
-
-            <div class="py-5 text-center">
-                <img class="mb-4" src="img/plant_logo.svg" width="72" height="72">
-                <h2>農產推廣平台</h2>
+    <main class="container py-5 mt-5" id="item">
+        <div class="row py-3 mt-5" style="background-color:rgb(248, 236, 236)">
+            <div class="col-7">
+                <div class="row ms-3" style=" height: 500px; position: relative;">
+                    <img id="first_img" :src="item_data.img_src[0]">
+                </div>
+                <div class="row py-3 mt-2" style="height: 150px;">
+                    <div class="col-2" v-for="(img,index) in item_data.img_src" @click="change_First_img(index)">
+                        <img :src="img" class="img-thumbnail">
+                    </div>
+                </div>
 
             </div>
-
-            <div class="row py-3">
-                <div class="col-11">
-                    <input id="search_text" type="text" class="form-control search_bar" placeholder="搜尋你要找的蔬果"
-                        v-model="keywords">
-                </div>
-                <div class="col-1 row">
-                    <button class="btn btn-block btn-outline-secondary search_button" @click="search_product">搜尋</button>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col">
-                    <p>城市</p>
-                    <div class="col-10">
-                        <select class="form-select" v-model="city">
-                            <option value="">不限定</option>
-                            <option v-for="(city,index) in Allcity" v-bind:value="city.name">{{city.name}}</option>
-                        </select>
+            <div class="col-5">
+                <div class="me-3 py-3" style="height:100% ; background-color:rgb(252, 252, 252)">
+                    <div class="py-3 ms-3 me-3" style="word-wrap:break-word;">
+                        <h3 class="py-3 mt-3">{{item_data.name}}</h3>
                     </div>
-                </div>
-                <div class="col">
-                    <p>類型</p>
-                    <div class="col-10">
-                        <select class="form-select" v-model="type">
-                            <option value="">不限定</option>
-                            <option value="水果">水果</option>
-                            <option value="蔬菜">蔬菜</option>
-                            <option value="肉類">肉類</option>
-                            <option value="其他">其他</option>
-                        </select>
+                    <div class="py-3 ms-3 me-3" style="background-color:rgb(221, 215, 215)">
+                        <div class="ms-3 ">
+                            <h5 class="text-success">價格: {{item_data.price}}$ / {{item_data.unit}}</h5>
+                            <h5 class="text-danger">庫存: {{item_data.amount}}</h5>
+                        </div>
                     </div>
-                </div>
-                <div class="col">
-                    <p>價格排序</p>
-                    <div class="col-10">
-                        <select class="form-select" v-model="price_sort">
-                            <option value="">不排序</option>
-                            <option value="ASC">由低到高</option>
-                            <option value="DESC">由高到低</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col">
-                    <p>日期排序</p>
-                    <div class="col-10">
-                        <select class="form-select" v-model="date_sort">
-                            <option value="">不排序</option>
-                            <option value="DESC">日期由近到遠</option>
-                            <option value="ASC">日期由遠到近</option>
-                        </select>
-                    </div>
-                </div>
+                    <div class="ms-3 py-5">
+                        <h5>交易方式: {{item_data.trade_type}}</h5>
+                        <h5>出貨地區: {{item_data.city}}-{{item_data.districts}}</h5>
 
+                        <button v-if="sneak_json.length > 0" type="button" class="btn btn-secondary"
+                            data-bs-toggle="modal" data-bs-target="#crop_modal">
+                            市場行情
+                        </button>
+                        <button v-else type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                            data-bs-target="#crop_modal" disabled>
+                            暫時查無資料
+                        </button>
+
+                    </div>
+
+
+                    <div class="ms-3 py-3 mt-5 me-3 text-center row">
+                        <button type="button" class="btn btn-success btn-block" onclick="v_btn.click()">
+                            加入願望清單
+                        </button>
+                    </div>
+                    <div class="ms-3 mt-5 me-3 text-primary">
+                        上架時間: {{time_com()}}
+                    </div>
+
+                </div>
 
 
             </div>
-
-
-
-
-
-
         </div>
 
-        <h5><span class="text-muted">一共搜尋到 {{result_count}} 個結果</span></h5>
-        <hr>
-        
-        <div class="row mb-3">
-            
-
-
-        
-           
-            <div class="col-md-3 mb-3 d-flex" v-for="item in allresult">
-
-                <div class="card align-self-stretch">
-                    <img v-bind:src="item.img_src" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title font-weight-bold" style="font-size: 2em;"> {{ item.p_name }} </h5>
-                        <h6 class="text-danger" style="font-size: 1.5em;line-height: 2;">${{ item.p_price }}/{{
-                            item.p_unit}}</h6>
-                        <button class="btn btn-primary btn-lg btn-block test" style="width: 100%;" type="button"
-                            v-bind:value="item.p_id"
-                            @click="window.open(`item.html?p_id=${item.p_id}`)">詳細資料</button>
-                        <td>
-                            <div class="card-text" style="float:left;">地區: {{ item.p_city }}</div>
-                            <!-- <div class="card-text" style="float:right;">農場名: {{ item.u_name }}</div> -->
-                        </td>
-
-                    </div>
-                </div>
+        <div class="row py-5 mt-5" style="background-color:rgb(248, 236, 236);">
+            <div class="ms-5 col-3 bighead">
+                <img :src="seller_data.img" alt="">
+            </div>
+            <div class="col-md-2">
+                <h5>{{seller_data.name}}</h5>
+            </div>
+            <div class="col pre-formatted text-secondary">
+                <h5>{{seller_data.description}}</h5>
+            </div>
+            <div class="col-2">
 
             </div>
-
         </div>
 
-        <div class="row justify-content-center"  style="font-size: 17px">
-            <div v-for="index in ALL_page" style="width: 5%;">
-
-                <h5 v-if="index == current_page" class="border border-secondary text-center text-danger" >{{index}}</h5>
-                <h5 v-else class="text-center page_word" @click="change_page(index)">{{index}}</h5>
+        <div class="row py-5 mt-5 pre-formatted" style="background-color:rgb(248, 236, 236);">
+            <div class="">
+                <h5>{{item_data.introduction}}</h5>
             </div>
         </div>
 
 
 
+        <div class="py-5 row">
+            <button type="button" class="btn" style="color: #f5f5f5;background-color:rgb(72, 156, 156)"
+                onclick="self.location.href='index.html'">返回</button>
+        </div>
+
+
+
+
+        <!-- 行情 modal -->
+        <div class="modal fade" id="crop_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">市場行情參考</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">名稱</th>
+                                    <th scope="col">交易所</th>
+                                    <th scope="col">每公斤/平均價</th>
+                                    <th scope="col"> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(value,index) in sneak_json">
+                                    <th scope="row">{{ index }}</th>
+                                    <td>{{ value.CropName }}</td>
+                                    <td>{{ value.MarketName }}</td>
+                                    <td>{{ value.Avg_Price }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-
     <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">© Green Sale</p>
     </footer>
-
-
-
-
 
 
 
@@ -298,7 +308,6 @@
         </div>
     </div>
 
- 
     <!-- member -->
     <div v-else="canlogout" class="modal fade" id="member" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -318,8 +327,8 @@
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">賣場名稱:</label>
-                            <input type="text" class="form-control" id="name" type="text" size="32"
-                                placeholder="名稱" v-model="name">
+                            <input type="text" class="form-control" id="name" type="text" size="32" placeholder="名稱"
+                                v-model="name">
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">地區:</label>
@@ -400,7 +409,14 @@
 
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+
+
+
+
+
+
+
     <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -413,16 +429,13 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
-
     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 
     <script src="js/monitor.js"></script>
-    <script src="js/shop_car.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/login.js"></script>
     <script src="js/member.js"></script>
-
+    <script src="js/item.js"></script>
+    <script src="js/shop_car.js"></script>
 </body>
 
 </html>

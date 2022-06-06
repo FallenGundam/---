@@ -9,57 +9,38 @@
 
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+
+
+
+
     <style type="text/css">
-        .project.logo {
-            height: 100%;
-            top: 9px;
-            right: 20px;
-        }
 
-        @media only screen and (max-width:990px) {
-            .logo {
-                width: 100px;
-                position: absolute;
-                top: 20px;
-                left: auto;
-                right: 20px;
-            }
-
-            .navbar {
-                background: white;
-            }
-
-            .navbar_btn {
-                padding: 6px 0px;
-            }
-        }
-
-        .nav_span {
-            font-size: 20px;
-            font-weight: 900;
-        }
-
-        .project.logo {
-            height: 100%;
-        }
 
         body {
             background-color: #f5f5f5;
         }
 
-        .card-text {
-            min-height: 180px;
+
+
+        .zoomImage {
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%;
+            overflow: hidden;
+            background-position: center center;
+            background-repeat: no-repeat;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
         }
 
-        .search_button {
-            height: 100%;
+
+        .page_word:hover {
+            color: aqua;
+            cursor: pointer;
         }
     </style>
 
@@ -70,56 +51,163 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="mointor">
-        <img src="img/plant_logo.svg" onclick="self.location.href='index.html'" class="project.logo">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a href="index.html" style="text-decoration:none;"><h1 class="nav-link">首頁 HOME<span class="sr-only"></span></h1></a> 
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <ul class="navbar-nav mr-auto list-inline">
-                    <li class="nav-item active">
-                        <td class="align-middle">
-                            <h4 class="align-middle " style="display: inline;" v-show="canlogout">welcome，</h4>
-                            <h4 class="align-middle" style="display: inline;color: orange;" v-show="canlogout">
-                                {{message}}&nbsp</h4>
-                        </td>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn navbar_btn" data-bs-toggle="modal"
-                            data-bs-target="#upload"><img class="logo1" src="img/upload_icon.svg" alt=""
-                                v-show="canlogout"><span class="nav_span align-middle"
-                                v-show="canlogout">商品上架</span></button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn navbar_btn" data-bs-toggle="modal"
-                            data-bs-target="#member"><img class="logo1" src="img/user_icon.svg" alt=""
-                                v-show="canlogout"><span class="nav_span align-middle"
-                                v-show="canlogout">個人資料編輯</span></button>
-                    </li>
 
-                    
+    <header>
+        <nav class="navbar navbar-expand-md fixed-top" style="background-color: rgb(238, 248, 229);" id="monitor">
+            <div class="container-fluid">
+                <div>
+                    <button type="button" class="btn" onclick="self.location.href='index.html'">
+                        <img src="img/plant_logo.svg" class="logo">
+                    </button>
 
-                    <li class="nav-item ">
-                        <button type="button" class="btn btn-danger" @click.prevent="logout" v-show="canlogout" style="padding: 5px 8px;
+                </div>
+                <a href="index.html" style="text-decoration:none;color:rgb(45, 107, 45)">
+                    <h3 class="mt-2">首頁 HOME</h3>
+                </a>
+                <div>
+                    <h4 class="align-middle " style="display: inline;" v-show="canlogout">
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspWelcome，</h4>
+                    <h4 class="align-middle" style="display: inline;color: orange;" v-show="canlogout">
+                        {{message}}&nbsp</h4>
+                </div>
+                <button class="navbar-toggler btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                   
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <!-- <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>  -->
+                    </ul>
+                    <form class="d-flex form-inline my-2 my-lg-0">
+                        <ul class="navbar-nav mr-auto list-inline">
+
+                            <li class="nav-item mt-3">
+                                <a href="product_edit.html" style="text-decoration:none" >
+                                    <img class="logo1" src="img/upload_icon.svg" alt="" v-show="canlogout">
+                                    <span class="nav_span align-middle" v-show="canlogout">商品上架&nbsp&nbsp&nbsp</span>
+                                </a>
+                            </li>
+                            <li class="nav-item mt-2">
+                                <button type="button" class="btn navbar_btn" data-bs-toggle="modal"
+                                    data-bs-target="#member" v-show="canlogout"><img class="logo1"
+                                        src="img/user_icon.svg" alt=""><span
+                                        class="nav_span align-middle">賣場資料編輯</span></button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button v-if="canlogout" type="button" class="btn btn-danger" @click.prevent="logout"
+                                    style="padding: 5px 8px;
                         margin: 14px 0px;">
-                            登出
-                        </button>
-                    </li>
+                                    登出
+                                </button>
+                                <button v-else="canlogin" type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#login">
+                                    登入
+                                </button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </nav>
 
-                </ul>
-            </form>
+    </header>
+
+
+
+
+    <div class="container py-5 mt-5" id="product_manage">
+        <div class="py-5 text-center">
+            <img class="mb-4" src="img/list_icon.svg" width="72" height="72">
+            <h2>商品管理</h2>
         </div>
-    </nav>
+        <h4><span class="text-muted">您目前上架中的商品</span></h4>
+        <div class="row mb-3">
+            <div class="col-6">
+                <input id="p_name" type="text" class="form-control" placeholder="搜尋商品名稱" v-model="search_name">
+            </div>
+            <div class="col-3">
+                <select class="form-select" v-model="search_type">
+                    <option value="">不限制</option>
+                    <option value="水果">水果</option>
+                    <option value="蔬菜">蔬菜</option>
+                    <option value="肉類">肉類</option>
+                    <option value="其他">其他</option>
+                </select>
+            </div>
+            <div class="col row">
+                <button class="btn btn-primary btn-block" @click="get_product">搜尋</button>
+            </div>
+
+        </div>
+
+
+
+        <hr>
+        <div class="row" id="search_msg">
+            <p class="text-success">一共搜尋到 {{count}} 個結果</p>
+        </div>
+        <div class="row mb-3 mt-4">
+            <div class="row mb-3 py-2 justify-content-around">
+
+
+                <div style="height:450px; width:250px; background-color: rgba(212, 209, 209, 0.904)"
+                    class="border border-secondary mt-2" v-for="(data,index) in alldata">
+                    <div class="row mt-2" style="height:65%;">
+                        <div class="zoomImage" v-bind:style="data.img_src"></div>
+                    </div>
+                    <div class="row py-2" style="word-wrap:break-word;">
+                        <h5>{{data.p_name}}</h5>
+                    </div>
+                    <div class="row">
+                        <p class="col-7">價格: {{data.p_price}}</p>
+                        <p class="col-5" style="font-size:15px">庫存: {{data.p_amount}}</p>
+                        <button class="col-6 btn btn-success" @click="edit_product(data.p_id)">編輯</button>
+                        <button class="col-6 btn btn-danger"
+                            @click="delete_product(data.p_id,index,data.p_name)">刪除</button>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="row justify-content-center" style="font-size: 17px">
+            <div v-for="index in All_page" style="width: 5%;">
+
+                <h5 v-if="index == current_page" class="border border-secondary text-center text-danger">{{index}}</h5>
+                <h5 v-else class="text-center page_word" @click="change_page(index)">{{index}}</h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <button class="btn btn-info btn-lg btn-block mt-5" onclick="self.location.href='index.html'">回首頁</button>
+        </div>
+
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">© Green Sale</p>
+        </footer>
+    </div>
+
+
+
+
+
     <!-- member -->
-    <div class="modal fade" id="member" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div v-else="canlogout" class="modal fade" id="member" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -128,6 +216,17 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <div>
+                            <p>編輯大頭貼</p>
+                            <input type="file" id="the_file" @change="fileSelected" style="display:none ;">
+                            <img v-if="img_display" :src="img_display" width="200" onclick="the_file.click()">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">賣場名稱:</label>
+                            <input type="text" class="form-control" id="name" type="text" size="32"
+                                placeholder="名稱" v-model="name">
+                        </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">地區:</label>
                             <select select class="form-select" aria-label="Default select example" v-model="region">
@@ -157,201 +256,14 @@
     </div>
 
 
-    <div class="modal fade " id="upload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">產品上傳</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <style type="text/css">
-
-                    </style>
-                    <div id="DIV1">
-
-
-
-                        <input type="file" id="the_file" @change="fileSelected">
-                        <img v-if="image" :src="image" width="200" />
-
-
-                    </div>
-                    <div id="DIV2">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="Account">名稱</span>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Default"
-                                aria-describedby="inputGroup-sizing-default" v-model="name">
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">價錢</span>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Default"
-                                aria-describedby="inputGroup-sizing-default" id="p_value" v-model="price">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">單位</span>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Default"
-                                aria-describedby="inputGroup-sizing-default" id="p_unit" v-model="unit">
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">城市</span>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Default"
-                                aria-describedby="inputGroup-sizing-default" id="p_city" v-model="city">
-                        </div>
-                        <div class="input-group mb-3" id="detail">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">詳細介紹</span>
-                            </div>
-                            <textarea style="resize:none;" cols="44" rows="5" id="p_detail" v-model="text"></textarea>
-                        </div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <!--這是用來清除上方的浮動效果-->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary " @click="dataupload">上傳</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 
 
 
-
-
-
-
-
-    <div class="container">
-        <div class="py-5 text-center">
-            <img class="mb-4" src="img/list_icon.svg" width="72" height="72">
-            <h2>商品管理</h2>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-12 order-md-2 mb-4">
-                <div class="input-group mb-3 search_bar">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 mb-3">
-            <h4><span class="text-muted">您目前上架中的商品</span></h4>
-        </div>
-        <div class="row" id="p_search">
-            <div class="col-md-12 ">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">名稱</th>
-                            <th scope="col">價格</th>
-                            <th scope="col">單位</th>
-                            <th scope="col">地區</th>
-                            <th scope="col"> </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="name in namelist">
-                            <th scope="row">{{ name.count }}</th>
-                            <td>{{ name.name }}</td>
-                            <td>{{ name.price }}</td>
-                            <td>{{ name.unit }}</td>
-                            <td>{{ name.city }}</td>
-                            <td><button type="button" data-bs-toggle="modal" data-bs-target="#edit"
-                                    class="btn btn-primary" v-bind:value="name.id"
-                                    @click.prevent="selectedit($event)">編輯</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <!--<img class="logo1" src="img/edit-logo.png">-->
-
-                <div class="modal fade " id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">產品編輯</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <style type="text/css">
-
-                                </style>
-
-                                <div>
-                                    <img class="logo1" style="width: 50%;height: auto" v-bind:src="imgsrc">
-                                </div>
-
-
-
-                                <div id="DIV2">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="Account">名稱</span>
-                                        </div>
-                                        <input type="text" class="form-control" aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default" v-model="name">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">價錢</span>
-                                        </div>
-                                        <input type="text" class="form-control" aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default" id="p_value" v-model="price">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">單位</span>
-                                        </div>
-                                        <input type="text" class="form-control" aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default" id="p_unit" v-model="unit">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">城市</span>
-                                        </div>
-                                        <input type="text" class="form-control" aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default" id="p_city" v-model="city">
-                                    </div>
-                                    <div class="input-group mb-3" id="detail">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">詳細介紹</span>
-                                        </div>
-                                        <textarea style="resize:none;" cols="44" rows="5" id="p_detail"
-                                            v-model="text"></textarea>
-                                    </div>
-                                </div>
-                                <div style="clear:both;"></div>
-                                <!--這是用來清除上方的浮動效果-->
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary " @click="savedata">儲存</button>
-                                <button type="button" class="btn btn-danger " @click="deletedata">刪除</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="btn btn-info btn-lg btn-block mt-5" onclick="self.location.href='index.html'">回首頁</button>
-        </div>
-        <footer class="my-5 pt-5 text-muted text-center text-small">
-            <p class="mb-1">© Green Sale</p>
-        </footer>
-    </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -365,15 +277,14 @@
 
 
 
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/jquery.cookie.min.js"></script>
-    <script src="assets/js/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 
 
-    <script src="js/mointor.js"></script>
+    <script src="js/monitor.js"></script>
     <script src="js/member.js"></script>
-    <script src="js/product_manage/upload.js"></script>
-    <script src="js/product_manage/p_search.js"></script>
+    <script src="js/product_manage/product_manage.js"></script>
+
 
 </body>
 

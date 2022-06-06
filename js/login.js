@@ -1,4 +1,4 @@
-var loginapp = new Vue({
+new Vue({
     el:'#login',
     data:{
         username: "",
@@ -29,8 +29,8 @@ var loginapp = new Vue({
                     location.reload();
                     
                 }else{
-                    $.removeCookie("token");
-					$.removeCookie("u_id");
+                    //$.removeCookie("token");
+					//$.removeCookie("u_id");
                     alert("帳號或密碼錯誤");
                 }
 

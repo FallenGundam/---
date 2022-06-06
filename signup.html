@@ -1,23 +1,91 @@
 <!DOCTYPE html>
 <html lang="zh-tw" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>َAnimated Login Form</title>
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
+
+<head>
+  <meta charset="utf-8">
+  <title>َAnimated Login Form</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background: #345e3b;
+    }
+
+    .box {
+      width: 300px;
+      padding: 40px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #191919;
+      text-align: center;
+      border-radius: 50px;
+    }
+
+    .box h1 {
+      color: white;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .box input[type="text"],
+    .box input[type="password"] {
+      border: 0;
+      background: none;
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+      border: 2px solid #3498db;
+      padding: 14px 10px;
+      width: 200px;
+      outline: none;
+      color: white;
+      border-radius: 24px;
+      transition: 0.25s;
+    }
+
+    .box input[type="text"]:focus,
+    .box input[type="password"]:focus {
+      width: 280px;
+      border-color: #2ecc71;
+    }
+
+    .box input[type="submit"] {
+      border: 0;
+      background: none;
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+      border: 2px solid #2ecc71;
+      padding: 14px 40px;
+      outline: none;
+      color: white;
+      border-radius: 24px;
+      transition: 0.25s;
+      cursor: pointer;
+    }
+
+    .box input[type="submit"]:hover {
+      background: #2ecc71;
+    }
+  </style>
+</head>
+
+<body>
   <div class="box" id="signup">
     <h1>註冊</h1>
     <input type="text" name="" placeholder="name" v-model="username">
     <input type="text" name="" placeholder="mail" v-model="mail">
     <input type="password" name="" placeholder="Password" v-model="password">
     <input type="password" name="" placeholder="Password confirm" v-model="password2">
-    <input type="submit" name="" value="register" @click.prevent="checkmail"> 
+    <input type="submit" name="" value="register" @click.prevent="checkmail">
     <div>
       <a style="color: blue;" href="index.html">返回上一頁</a>
       <p style="color: aliceblue;">{{message}}</p>
     </div>
-    
+
 
   </div>
 
@@ -26,6 +94,7 @@
   <script src="assets/js/vue.min.js"></script>
   <script src="js/signup.js"></script>
 
-  
-  </body>
+
+</body>
+
 </html>

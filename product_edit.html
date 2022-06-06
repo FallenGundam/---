@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+
+    <style type="text/css">
+        .imgupload {
+            height: 75%;
+            border: solid;
+            border-color: dark;
+            background-color: rgb(209, 206, 206);
+        }
+
+        .imgupload:hover {
+
+            border-style: dashed;
+            border-color: rgb(35, 35, 145);
+            cursor: pointer;
+            background-color: rgb(174, 179, 248);
+        }
+
+        .type_selected_effect {
+            background-color: rgb(220, 238, 238);
+            border: dashed;
+        }
+
+        #typeblock:hover {
+            cursor: pointer;
+        }
+
+        .fade-wrapper {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -100px;
+            margin-top: -10px;
+            width: 200px;
+            height: 20px;
+            z-index: 20000;
+            text-align: center;
+        }
+    </style>
+
+    <title>農產品推銷網站</title>
+
+
+
+</head>
+
+<body>
+    <!-- 頂部控制板 monitor -->
+
+
+    <header>
+        <nav class="navbar navbar-expand-md fixed-top" style="background-color: rgb(238, 248, 229);" id="monitor">
+            <div class="container-fluid">
+                <div>
+                    <button type="button" class="btn" onclick="self.location.href='index.html'">
+                        <img src="img/plant_logo.svg" class="logo">
+                    </button>
+
+                </div>
+                <a href="index.html" style="text-decoration:none;color:rgb(45, 107, 45)">
+                    <h3 class="mt-2">首頁 HOME</h3>
+                </a>
+                <div>
+                    <h4 class="align-middle " style="display: inline;" v-show="canlogout">
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspWelcome，</h4>
+                    <h4 class="align-middle" style="display: inline;color: orange;" v-show="canlogout">
+                        {{message}}&nbsp</h4>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <!-- <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>  -->
+                    </ul>
+                    <form class="d-flex form-inline my-2 my-lg-0">
+                        <ul class="navbar-nav mr-auto list-inline">
+
+                            <li class="nav-item mt-2">
+                                <a href="product_manage.html">
+                                    <button type="button" class="btn navbar_btn">
+                                        <img class="logo1" src="img/user_icon.svg" alt="" v-show="canlogout">
+                                        <span class="nav_span align-middle" v-show="canlogout">賣場編輯</span>
+                                    </button>
+                                </a>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <button v-if="canlogout" type="button" class="btn btn-danger" @click.prevent="logout"
+                                    style="padding: 5px 8px;
+                        margin: 14px 0px;">
+                                    登出
+                                </button>
+                                <button v-else="canlogin" type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#login">
+                                    登入
+                                </button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+
+
+
+
+    <main class="py-5 container-md py-5 mt-5" id="product_edit">
+        <div class="row g-5">
+
+
+            <div class="col-md-10">
+                <h2 class="text-center"><strong>商品管理</strong></h2>
+                <hr>
+                <h4 id="p_img">商品圖片</h4>
+                <div class="row mb-3 py-2 justify-content-around text-center">
+
+                    <div style="height:200px; width:150px;" v-for="(img,index) in data_model.img_src">
+                        <div class="row imgupload" @click="img_upload_click($event,index)">
+                            <img v-bind:src="img" style="height:80%;">
+                            <p v-if="index == 0">封面</p>
+                            <input type="file" v-bind:id="index" @change="img_input_event($event,index)"
+                                style="display: none;">
+                        </div>
+                        <div class="row" style="height:20%;">
+                            <button type="button" class="btn-block btn btn-sm btn-danger"
+                                @click="img_delete(index)">刪除</button>
+                        </div>
+                    </div>
+
+
+                    <!-- <img :src="img_preview" style="display: none;" alt=""> -->
+                </div>
+
+
+                <div class="row">
+                    <H4 class="col-3">商品名稱</H4>
+                    <div class="col-9" id="p_name_msg" style="text-align:right; color:red"></div>
+
+                </div>
+                <input id="p_name" type="text" class="form-control" placeholder="商品名稱" aria-label="輸入商品名稱"
+                    aria-describedby="basic-addon2" v-model="data_model.name">
+                <br>
+
+
+                <div class="row">
+                    <H4 class="col-3">商品簡介</H4>
+                    <div class="col-9" id="p_text_msg" style="text-align:right; color:red"></div>
+
+                </div>
+                <textarea class="form-control" id="p_text" rows="10" v-model="data_model.introduction"></textarea>
+                <br>
+
+
+                <div class="row" style="height:15% ;">
+                    <div class="col-6">
+                        <h4>商品分類</h4>
+                        <div id="typeblock" class="row justify-content-around text-center align-items-center">
+                            <div class="col-3 py-2" @click="select_type">
+                                <img src="img/product-logo.jpg" style="width:50%;" alt="">
+                                <p>水果</p>
+                            </div>
+                            <div class="col-3 py-2" @click="select_type">
+                                <img src="img/product-logo.jpg" style="width:50%;" alt="">
+                                <p>蔬菜</p>
+                            </div>
+                            <div class="col-3 py-2" @click="select_type">
+                                <img src="img/product-logo.jpg" style="width:50%;" alt="">
+                                <p>肉類</p>
+                            </div>
+                            <div class="col-3 py-2" @click="select_type">
+                                <img src="img/product-logo.jpg" style="width:50%;" alt="">
+                                <p>其他</p>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+
+                    <div class="col-6">
+                        <div class="row">
+                            <H4 class="col-3">出貨地區</H4>
+                            <div class="col-9" id="p_city_msg" style="text-align:right; color:red"></div>
+                        </div>
+                        <div class="row py-4">
+                            <div class="col-md-4">
+
+                                <input class="form-control" title="在這裡提供郵遞區號查找功能" placeholder="郵遞區號查找功能"
+                                    @change="SetCurrentLocation($event)" v-model="id_search">
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select" id="p_city" placeholder="請選擇縣市" v-model="data_model.city"
+                                    @change="ResetLocation">
+                                    <option v-for="(city,index) in city_data" v-bind:value="city.name">
+                                        {{ city.name }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="form-select" id="districts" placeholder="請選擇鄉鎮區"
+                                    v-model="data_model.districts">
+                                    <option v-for="(dis,index) in GetDistrictsList()" v-bind:value="dis.name">
+                                        {{ dis.zip }} {{ dis.name }}
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row py-3">
+
+                    <div class="col-2 ">
+                        <h4>商品價格</h4>
+                        <input id="" v-model="data_model.price" type="text" class="form-control" placeholder="商品名稱"
+                            aria-label="輸入商品名稱" aria-describedby="basic-addon2">
+                    </div>
+                    <div class="col-md-2 ">
+                        <h4>單位單價</h4>
+                        <select class="form-select" placeholder="" v-model="data_model.unit">
+                            <option value="公斤">公斤</option>
+                            <option value="公克">公克</option>
+                            <option value="台斤">台斤</option>
+                            <option value="磅">磅</option>
+                            <option value="個數">個數</option>
+                        </select>
+                    </div>
+
+                    <!-- Force next columns to break to new line at md breakpoint and up -->
+
+                    <div class="col-2 ">
+                        <h4>交易方式</h4>
+                        <select class="form-select" placeholder="" v-model="data_model.trade_type">
+                            <option value="面交">面交</option>
+                        </select>
+                    </div>
+                    <div class="col-2 ">
+                        <h4>商品庫存</h4>
+                        <input id="" type="text" v-model="data_model.amount" class="form-control" placeholder="商品名稱"
+                            aria-label="輸入商品名稱" aria-describedby="basic-addon2">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-2">
+                <div class="position-sticky" style="top: 100px;">
+                    <a href="#p_name">商品名稱</a><br>
+
+                    <a href="#p_img">商品圖片</a>
+                </div>
+            </div>
+            <div class="py-5 row">
+                <button type="button" class="btn" style="color: #f5f5f5;background-color:rgb(72, 156, 156)"
+                    @click="savedata" >儲存</button>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <footer class="my-5 pt-5 text-muted text-center text-small">
+                <p class="mb-1">© Green Sale</p>
+            </footer>
+        </div>
+    </main>
+
+
+    <div class="modal fade" id="loadingModal">
+        <div class="fade-wrapper">
+            <div class="progress progress-striped active" style="margin-bottom: 0;">
+                <div class="progress-bar" style="width: 100%;"></div>
+            </div>
+            <h5>正在加载...</h5>
+        </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+
+    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+    <script src="js/monitor.js"></script>
+    <script src="js/product_manage/product_edit.js"></script>
+
+
+</body>
+
+</html>
